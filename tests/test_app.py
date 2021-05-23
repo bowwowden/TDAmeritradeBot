@@ -20,5 +20,5 @@ def test_get_option_history(app, label: str = 'AAPL'):
 
 
 def test_plot_macd_crossovers(app, label: str = 'AAPL'):
-    app.plot_macd(label)
+    app.plot_moving_averages(label)
     assert True

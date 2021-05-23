@@ -1,4 +1,4 @@
-from src.app.option_views import OptionViews
+from src.app.grapher import Grapher
 from src.app.td_authenticator import td_authenticator
 import httpx
 
@@ -10,17 +10,22 @@ from src.app import config
 
 class App:
 
-    views: OptionViews
+    views: Grapher
     auth: td_authenticator
 
     def __init__(self):
         self.auth: td_authenticator = td_authenticator()
-        self.views: OptionViews = OptionViews()
+        self.views: Grapher = Grapher()
 
     def authenticate(self):
         self.auth.authenticate()
 
-    def get_option_price_histoy(self, label: str):
+    def plot_moving_averages(self, label: str):
+        data = self.get_option_price_histoy(label)
+        self.views.plot_moving_averages(label, data)
+
+    @staticmethod
+    def get_option_price_histoy(label: str):
         c = easy_client(
             api_key=config.API_KEY,
             redirect_uri=config.REDIRECT_URI,
@@ -35,8 +40,4 @@ class App:
         assert resp.status_code == httpx.codes.OK
         history = resp.json()
         return history
-
-    def plot_macd(self, label: str):
-        self.views.get_macd(label)
-        self.views.plot_macd_crossovers(label)
 
