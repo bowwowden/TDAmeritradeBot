@@ -1,5 +1,5 @@
 import pytest
-from src.app.app import App
+from src.controller.app import App
 
 
 @pytest.fixture
@@ -21,4 +21,9 @@ def test_get_option_history(app, label: str = 'AAPL'):
 
 def test_plot_macd_crossovers(app, label: str = 'AAPL'):
     app.plot_moving_averages(label)
+    assert True
+
+
+def test_plot_macd_buy_sell_signals(app, label: str = 'AAPL'):
+    app.plot_macd_buy_sell_signals(app, label)
     assert True

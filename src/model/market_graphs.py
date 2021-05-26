@@ -1,8 +1,12 @@
 import pandas as pd
 import plotly.graph_objects as go
 
+from src.model.technical_analysis import technical_analysis
 
-class Grapher:
+
+class market_graphs:
+
+    market_analyzer: technical_analysis = technical_analysis()
 
     def plot_moving_averages(self, label: str, data):
         # retrieve actual price history data
@@ -10,8 +14,6 @@ class Grapher:
 
         # create a pandas DataFrame with candles
         df = pd.DataFrame(ticker_data)
-
-        print(df)
 
         xdt = pd.to_datetime(df.datetime, unit='ms')
         trace1 = {
@@ -69,3 +71,6 @@ class Grapher:
         fig = go.Figure(data=data, layout=layout)
         fig.write_html( label + "Moving Averages.html")
         fig.show()
+
+    def plot_macd_buy_sell(self, label: str, data):
+        signal_line = self.market_analyzer.get_signal_line(data)

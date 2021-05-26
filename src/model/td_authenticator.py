@@ -1,6 +1,6 @@
 
 from tda import auth
-from src.app import config
+from src.model import config
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 
