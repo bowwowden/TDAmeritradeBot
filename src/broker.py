@@ -25,16 +25,13 @@ class Broker():
 
     def sell_position(self, position):
         self.profit_position(position)
-        self.remove_from_portfolio(position)
+        self.remove_from_portfolio()
 
     def profit_position(self, position):
         self.cash = self.cash + (position.price * position.quantity)
 
-    def remove_from_portfolio(self, position):
-        for item in self.portfolio:
-            if item.price == position.price:
-                self.portfolio.remove(item)
-                break
+    def remove_from_portfolio(self):
+        self.portfolio.pop(0)
 
     def has_position(self):
         if len(self.portfolio) is 0:
