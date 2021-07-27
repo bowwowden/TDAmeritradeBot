@@ -30,35 +30,30 @@ class MACD(Indicator):
     # Add labels to dataframe that are indicators of when the MACD and Signal Line crossover
     def calculate_macd_signal_line_crossovers(self, dataframe):
         dataframe = self.get_macd_indicators(dataframe)
-        Upswing = []
-        Downswing = []
+        Crossovers = []
+        Upswings = []
+        Downswings = []
         flag = -1
         for i in range(0, len(dataframe)):
             # Upswing
             if dataframe['MACD'][i] > dataframe['Signal Line'][i]:
                 # haven't passed
                 if flag != 1:
-                    Upswing.append(dataframe['close'][i])
-                    Downswing.append(np.nan)
+                    Crossovers.append('Upswing')
                     flag = 1
                 else:
-                    Upswing.append(np.nan)
-                    Downswing.append(np.nan)
+                    Crossovers.append(np.nan)
             # Downswing
             elif dataframe['MACD'][i] < dataframe['Signal Line'][i]:
                 if flag != 0:
-                    Downswing.append(dataframe['close'][i])
-                    Upswing.append(np.nan)
+                    Crossovers.append('Downswing')
                     flag = 0
                 else:
-                    Downswing.append(np.nan)
-                    Upswing.append(np.nan)
+                    Crossovers.append(np.nan)
             else:
-                Upswing.append(np.nan)
-                Downswing.append(np.nan)
+                Crossovers.append(np.nan)
 
-        dataframe['Upswing_Signal_Price'] = Upswing
-        dataframe['Downswing_Signal_Price'] = Downswing
+        dataframe['crossover'] = Crossovers
         return dataframe
 
     def get_upswing_points(self, dataframe) -> []:

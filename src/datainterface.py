@@ -21,6 +21,9 @@ class DataSource(DataInterface):
     def get_data(self):
         return self._datafeed.load_data()
 
+    def get_data_as_list(self):
+        return self._datafeed.tolist()
+
 
 class ExampleDataSource:
     ticker_data: pd = None

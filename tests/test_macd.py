@@ -3,7 +3,9 @@ import pytest
 
 from src.datainterface import ExampleDataSource, DataSource
 from src.indicators.macd import MACD
+
 pandas.set_option('display.max_rows', None)
+
 
 @pytest.fixture
 def DataFeed():
@@ -14,7 +16,13 @@ def DataFeed():
 
 def test_get_indicators(DataFeed):
     macd = MACD()
-    macd.get_indicators(DataFeed)
+    dataframe = macd.get_indicators(DataFeed)
+
+
+def test_convert_indicators_to_json(DataFeed):
+    macd = MACD()
+    dataframe = macd.get_indicators(DataFeed)
+    print(dataframe.to_json(orient='records'))
 
 
 def test_get_macd_swing_lines(DataFeed):
