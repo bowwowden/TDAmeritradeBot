@@ -60,14 +60,21 @@ class TestStrategy():
                 self.enter_position(position)
 
                 # 1 hour after 15 minutes = 5 * 12
-
+                exit_position_price = 0
+                if (i + 12) < length: 
+                    exit_position_price = stock_data[i+12]
+                    
             elif candlestick['crossover'] == 'Downswing':
                 position.set_quantity(1)
                 position.set_price(price)
                 self.exit_position(position)
+            
+            # Exit all positions
+            if i == length:
+                self.exit_all_positions()
 
             self.log(position, candlestick)
-
+        
     def log(self, position: Position, candlestick):
         balance: str = str(self.broker.get_balance())
         position: str = str(position.price)
@@ -90,6 +97,9 @@ class TestStrategy():
         balance = str(self.broker.get_balance())
         print("Final Balance: " + balance
               + " | Win Rate: ")
+
+    def exit_all_positions(self):
+        pass
 
 
 def test_strategy_print(DataFeed):
