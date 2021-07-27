@@ -1,7 +1,8 @@
 import pandas as pd
 import plotly.graph_objects as go
+from matplotlib import pyplot as plt
 
-from src.model.technical_analysis import technical_analysis
+from src.technical_analysis import technical_analysis
 
 
 class market_graphs:
@@ -74,3 +75,21 @@ class market_graphs:
 
     def plot_macd_buy_sell(self, label: str, data):
         signal_line = self.market_analyzer.get_signal_line(data)
+
+    def plot_data(self, MACD_Dataframe):
+        # Show the data
+        plt.figure(figsize=(12.2, 4.5))
+        plt.scatter(MACD_Dataframe.index, MACD_Dataframe['Buy_Signal_Price'], color='green', label='Buy',
+                    marker='^', alpha=1)
+        plt.scatter(MACD_Dataframe.index, MACD_Dataframe['Sell_Signal_Price'], color='red', label='Sell',
+                    marker='v', alpha=1)
+        plt.plot(MACD_Dataframe['close'], label='Close Price', alpha=0.35)
+        plt.title('Close Price Buy and Sell Signals')
+        plt.xticks(rotation=45)
+        plt.xlabel('Date')
+        plt.ylabel('Close Price USD ($)')
+        plt.legend(loc='upper left')
+        plt.show()
+
+
+
