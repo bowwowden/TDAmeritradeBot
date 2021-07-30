@@ -3,8 +3,8 @@ from tda.auth import easy_client
 from tda.client import Client
 
 from src.brokerage import BrokerageAPI
-from src.model import config
-from src.model.td_authenticator import td_authenticator
+from src.tda_interface import config
+from src.tda_interface.td_authenticator import td_authenticator
 
 
 class Tda_Interface(BrokerageAPI):

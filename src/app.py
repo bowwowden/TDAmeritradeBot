@@ -2,9 +2,9 @@ import httpx
 from tda.auth import easy_client
 from tda.client import Client
 
-from src.model import config
-from src.model.market_graphs import market_graphs
-from src.model.td_authenticator import td_authenticator
+from src.tda_interface import config
+from src.tda_interface.market_graphs import market_graphs
+from src.tda_interface.td_authenticator import td_authenticator
 
 
 class App:

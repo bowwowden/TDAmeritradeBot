@@ -4,6 +4,7 @@ from src.indicator import Indicator
 
 
 class MACD(Indicator):
+    data = None
 
     def get_indicators(self, dataframe):
         dataframe = self.get_macd_indicators(dataframe)
@@ -31,8 +32,7 @@ class MACD(Indicator):
     def calculate_macd_signal_line_crossovers(self, dataframe):
         dataframe = self.get_macd_indicators(dataframe)
         Crossovers = []
-        Upswings = []
-        Downswings = []
+
         flag = -1
         for i in range(0, len(dataframe)):
             # Upswing
@@ -55,27 +55,3 @@ class MACD(Indicator):
 
         dataframe['crossover'] = Crossovers
         return dataframe
-
-    def get_upswing_points(self, dataframe) -> []:
-        dataframe = self.get_macd_indicators(dataframe)
-        upswing_ticks = []
-
-        for i in range(1, len(dataframe)):
-            if dataframe['MACD'][i] > dataframe['Signal Line'][i]:
-                if dataframe['MACD'][i - 1] <= dataframe['Signal Line'][i - 1]:
-                    upswing_ticks.append(dataframe['close'][i])
-            else:
-                upswing_ticks.append(np.nan)
-        return upswing_ticks
-
-    def get_downswing_points(self, dataframe) -> []:
-        dataframe = self.get_macd_indicators(dataframe)
-        downswing_ticks = []
-
-        for i in range(1, len(dataframe)):
-            if dataframe['MACD'][i] < dataframe['Signal Line'][i]:
-                if dataframe['MACD'][i - 1] <= dataframe['Signal Line'][i - 1]:
-                    downswing_ticks.append(dataframe['close'][i])
-            else:
-                downswing_ticks.append(np.nan)
-        return downswing_ticks

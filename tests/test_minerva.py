@@ -1,6 +1,6 @@
 import pytest
 
-from src.datainterface import ExampleDataSource, DataSource
+from src.datainterface import ExampleData, DataSource
 from src.indicators.macd import MACD
 from src.minerva import Minerva
 from src.strategy import Strategy
@@ -8,7 +8,7 @@ from src.strategy import Strategy
 
 @pytest.fixture
 def DataFeed():
-    example_data = ExampleDataSource('example_data/AAPL61Data')
+    example_data = ExampleData('example_data/AAPL61Data')
     datasource = DataSource(example_data)
     return datasource
 
@@ -41,7 +41,7 @@ def test_minerva_backtest_without_strategy(DataFeed):
     minerva: Minerva = Minerva(DataFeed)
     minerva.backtest_strategy()
 
-    assert True
+    assert False
 
 
 def test_minerva_backtest_with_one_strategy():

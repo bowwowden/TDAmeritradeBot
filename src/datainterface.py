@@ -1,3 +1,5 @@
+import json
+
 import pandas as pd
 
 
@@ -24,8 +26,13 @@ class DataSource(DataInterface):
     def get_data_as_list(self):
         return self._datafeed.tolist()
 
+    def get_dataframe_as_json(self, data: pd):
+        data = data.to_json(orient='records')
+        data = json.loads(data)
+        return data
 
-class ExampleDataSource:
+
+class ExampleData:
     ticker_data: pd = None
     file_location: str = None
 
