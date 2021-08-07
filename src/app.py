@@ -3,7 +3,7 @@ from tda.auth import easy_client
 from tda.client import Client
 
 from src.tda_interface import config
-from src.tda_interface.market_graphs import market_graphs
+from src.plots.plot import market_graphs
 from src.tda_interface.td_authenticator import td_authenticator
 
 

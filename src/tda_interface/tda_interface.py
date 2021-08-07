@@ -17,7 +17,7 @@ class Tda_Interface(BrokerageAPI):
         self.auth.authenticate()
 
     @staticmethod
-    def get_option_price_histoy(label: str):
+    def get_stock_price_history(label: str, params):
         c = easy_client(
             api_key=config.API_KEY,
             redirect_uri=config.REDIRECT_URI,

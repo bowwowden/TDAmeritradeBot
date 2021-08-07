@@ -79,3 +79,14 @@ def test_check_downswings(DataFeed):
             Downswings.append(candlestick['close'])
 
     assert chkvalues == Downswings
+
+
+def test_plot_graph(DataFeed):
+    macd = MACD()
+
+    dataframe = macd.get_crossover(dataframe=DataFeed)
+    data = dataframe.to_json(orient='records')
+    stock_data = json.loads(data)
+
+    assert False
+
