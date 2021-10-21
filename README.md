@@ -1,5 +1,7 @@
 # Gaming-the-Markets
-This program is a comprehensive bot that uses the TD-Ameritrade platform for getting data. It is a bot that backtests and forward tests strategies for day trading on the stock market.
+This program is a bot that backtests stock data fetched from the TDA Ameritrade
+
+# Work in Progress
 
 
 ## Strategy
